@@ -2,19 +2,20 @@ import React, { useEffect } from "react";
 
 export default function Mapa({height, width, keyApi, center, titleLayer, zoom}) {
   useEffect(() => {
+
     window.L.mapquest.key  = keyApi;
 
-    var map = window.L.mapquest.map('map', {
-      center: [37.7749, -122.4194],
-      layers: window.L.mapquest.tileLayer('map'),
-      zoom: 12
+    const map = window.L.mapquest.map('map', {
+      center,
+      layers: window.L.mapquest.tileLayer(titleLayer),
+      zoom
     });
 
-    map.addControl(window.L.mapquest.control());
+    map.addControl(window.L.mapquest.control({position : "topleft"}));
   }, []);
 
   return (
-  <div className = "map" style = {{height:height, width: width}}>
+  <div id = "map" style = {{width, height}}>
     <p>Cargando mapa...</p>
   </div>);
 }
